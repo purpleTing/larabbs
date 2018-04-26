@@ -29,4 +29,9 @@ class UsersController extends Controller
         \Cache::forget($request->verification_key);
         return $this->response->created();
     }
+
+    public function me()
+    {
+
+    }
 }

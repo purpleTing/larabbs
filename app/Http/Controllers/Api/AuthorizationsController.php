@@ -11,7 +11,7 @@ class AuthorizationsController extends Controller
 {
     public function socialStore($type, AuthorizationsRequest $request)
     {
-        if (!in_array($type, ['weixin'])){
+        if (!in_array($type, ['weixin'])) {
             return $this->response->errorBadRequest();
         }
 
@@ -21,7 +21,7 @@ class AuthorizationsController extends Controller
         try {
             if ($code = $request->code) {
                 $response = $driver->getAccessTokenResponse($code);
-                $token = array_get($response, 'access_token');
+                $token    = array_get($response, 'access_token');
             } else {
                 $token = $request->access_token;
 
@@ -32,10 +32,10 @@ class AuthorizationsController extends Controller
 
             //根据access_token获取用户信息
             $oauthUser = $driver->userFromToken($token);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->response->errorUnauthorized('参数错误,未获取到用户信息');
         }
-        switch ($type){
+        switch ($type) {
             case 'weixin':
                 $unionid = $oauthUser->offsetExists('unionid') ? $oauthUser->offsetGet('unionid') : null;
 
@@ -48,13 +48,13 @@ class AuthorizationsController extends Controller
                 //如果用户不存在就创建用户
                 if (!$user) {
                     $user = User::create([
-                        'name' => $oauthUser->getNickname(),
-                        'avatar' => $oauthUser->getAvatar(),
-                        'weixin_openid' => $oauthUser->getId(),
+                        'name'           => $oauthUser->getNickname(),
+                        'avatar'         => $oauthUser->getAvatar(),
+                        'weixin_openid'  => $oauthUser->getId(),
                         'weixin_unionid' => $unionid,
                     ]);
                 }
-            break;
+                break;
         }
 
         $token = \Auth::guard('api')->fromUser($user);
@@ -66,7 +66,7 @@ class AuthorizationsController extends Controller
     {
         $username = $request->username;
 
-        filter_var($username, FILTER_VALIDATE_EMAIL)?
+        filter_var($username, FILTER_VALIDATE_EMAIL) ?
             $credentials['email'] = $username :
             $credentials['phone'] = $username;
 
@@ -85,10 +85,10 @@ class AuthorizationsController extends Controller
     private function respondWithToken($token)
     {
         return $this->response->array([
-        'access_token' => $token,
-        'token_type' => 'Bearer',
-        'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
-         ]);
+            'access_token' => $token,
+            'token_type'   => 'Bearer',
+            'expires_in'   => \Auth::guard('api')->factory()->getTTL() * 60
+        ]);
     }
 
     public function update()

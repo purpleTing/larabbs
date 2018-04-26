@@ -6,13 +6,13 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api'
-], function($api) {
+], function ($api) {
     $api->group([
         'middleware' => 'api.throttle',
-        'limit' => config('api.rate_limits.sign.limit'),
-        'expires' => config('api.rate_limits.sign.expires'),
-    ], function($api) {
-
+        'limit'      => config('api.rate_limits.sign.limit'),
+        'expires'    => config('api.rate_limits.sign.expires'),
+    ], function ($api) {
+        //游客可以访问的接口
         // 短信验证码
         $api->post('verificationCodes', 'VerificationCodesController@store')
             ->name('api.verificationCodes.store');
@@ -21,12 +21,18 @@ $api->version('v1', [
         $api->post('users', 'UsersController@store')
             ->name('api.users.store');
 
+        //需要token的接口 利用中间件来验证token
+        $api->group(['middleware' => 'api.auth'], function ($api) {
+            $api->get('users', 'UsersControler@me')
+                ->name('api.users.show');
+        });
+
     });
 });
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api'
-],function($api) {
+], function ($api) {
 
     //图片验证码
     $api->post('captchas', 'CaptchasController@store')
