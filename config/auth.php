@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
@@ -99,4 +99,7 @@ return [
         ],
     ],
 
+    'auth' => [
+        'jwt' => 'Dingo\Api\Auth\Provider\JWT',
+    ],
 ];
