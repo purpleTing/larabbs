@@ -17,7 +17,7 @@ class UserTransformer extends TransformerAbstract
             'introduction'     => $user->introduction,
             'bound_phone'      => $user->phone ? true : false,
             'bound_weixin'     => ($user->weixin_openid || $user->weixin_unionid) ? true : false,
-            'last_acticied_at' => $user->last_acticied_at->toDateTimeString(),
+            'last_actived_at' => $user->last_actived_at->toDateTimeString(),
             'created_at'       => $user->created_at->toDateTimeString(),
             'updated_at'       => $user->updated_at->toDateTimeString(),
         ];

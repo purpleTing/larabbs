@@ -244,4 +244,8 @@ return [
             'expires' => env('SIGN_RATE_LIMITS', 10)
         ],
     ],
+
+    'auth' => [
+        'jwt' => 'Dingo\Api\Auth\Provider\JWT',
+    ],
 ];
