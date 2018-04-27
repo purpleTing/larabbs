@@ -57,6 +57,11 @@ $api->version('v1', [
     $api->delete('authorizations/current', 'AuthorizationsController@delete')
         ->name('api.authorizations.current.delete');
 
+    //话题分类列表(游客可以访问 不需要验证token)
+    $api->get('categories', 'CategoriesController@index')
+        ->name('api.categories.index');
+
+    //需要验证token的接口
     $api->group(['middleware' => 'api.auth'], function($api) {
 
         // 当前登录用户信息
