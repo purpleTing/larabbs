@@ -21,7 +21,7 @@ class TopicsController extends Controller
 
     public function update(TopicsRequest $request, Topic $topic)
     {
-        $this->authorize('update', $topic);
+//        $this->authorize('update', $topic);
         $topic->update($request->all());
 
         return $this->response->item($topic, new TopicsTransformer());

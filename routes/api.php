@@ -30,7 +30,7 @@ $api->version('v1', [
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => 'serializer:array'
+    'middleware' => ['serializer:array', 'bindings']
 ], function ($api) {
 
     //图片验证码
@@ -62,12 +62,11 @@ $api->version('v1', [
         ->name('api.categories.index');
 
     //需要验证token的接口
-    $api->group(['middleware' => 'api.auth'], function($api) {
+        $api->group(['middleware' => 'api.auth'], function($api) {
 
         // 当前登录用户信息
         $api->get('user', 'UsersController@me')
             ->name('api.user.show');
-        });
 
         //编辑登录用户的信息
         $api->patch('user', 'UsersController@update')
@@ -81,8 +80,12 @@ $api->version('v1', [
         $api->post('topics', 'TopicsController@store')
             ->name('api.topics.store');
 
-        //修改话题
+            //修改话题
         $api->patch('topics/{topic}', 'TopicsController@update')
             ->name('api.topics.update');
+        });
+
+
+
 });
 
