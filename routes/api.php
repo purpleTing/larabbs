@@ -61,8 +61,13 @@ $api->version('v1', [
     $api->get('categories', 'CategoriesController@index')
         ->name('api.categories.index');
 
+    //话题列表
     $api->get('topics', 'TopicsController@index')
         ->name('api.topics.index');
+
+    //话题详情
+    $api->get('topics/{topic}', 'TopicsController@show')
+        ->name('api.topics.show');
 
     //某个用户发表所有的话题
     $api->get('users/{user}/topics', 'TopicsController@userIndex')

@@ -63,4 +63,9 @@ class TopicsController extends Controller
 
         return $this->response->item($topics, new TopicsTransformer());
     }
+
+    public function show(Request $request, Topic $topic)
+    {
+        return $this->response->item($topic, new TopicsTransformer());
+    }
 }

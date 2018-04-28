@@ -22,8 +22,8 @@ class TopicsTransformer extends TransformerAbstract
             'last_reply_user_id' => (int)$topic->last_reply_user_id,
             'excerpt'            => $topic->excerpt,
             'slug'               => $topic->slug,
-            'created_at'         => $topic->created_at->toDateTimeString(),
-            'updated_at'         => $topic->updated_at->toDateTimeString(),
+//            'created_at'         => $topic->created_at->toDateTimeString(),
+//            'updated_at'         => $topic->updated_at->toDateTimeString(),
         ];
     }
 
