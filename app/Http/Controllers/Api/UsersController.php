@@ -57,4 +57,5 @@ class UsersController extends Controller
 
         return $this->response->item($user, new UserTransformer());
     }
+
 }
