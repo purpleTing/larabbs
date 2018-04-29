@@ -115,5 +115,13 @@ $api->version('v1', [
             $api->get('users/{user}/replies', 'RepliesController@userIndex')
                 ->name('api.users.replies.userIndex');
 
+            //查看自己收到的通知
+            $api->get('user/notifications', 'NotificationsController@index')
+                ->name('api.user.notifications.index');
+
+            //查看未读的消息
+            $api->get('user/notifications/stats', 'NotificationsController@stats')
+                ->name('api.user.notifications.stats');
+
 });
 
