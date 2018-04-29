@@ -103,5 +103,17 @@ $api->version('v1', [
             $api->post('topics/{topic}/replies', 'RepliesController@store')
                 ->name('api.topics.replies.store');
 
+            //删除某个话题下的某个回复
+            $api->delete('topics/{topics}/reply/{reply}', 'RepliesController@destroy')
+                ->name('api.topics.reply.destroy');
+
+            //话题的回复列表
+            $api->get('topics/{topic}/replies', 'RepliesController@index')
+                ->name('api.topics.replies.index');
+
+            //某个用户的回复列表
+            $api->get('users/{user}/replies', 'RepliesController@userIndex')
+                ->name('api.users.replies.userIndex');
+
 });
 
