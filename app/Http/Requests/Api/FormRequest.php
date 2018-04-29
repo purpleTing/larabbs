@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests\Api;
 
+use Dingo\Api\Http\FormRequest as BaseFormRequest;
 
-class RepliesRequest extends FormRequest
+class FormRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +24,7 @@ class RepliesRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => 'required|min:2',
+            //
         ];
     }
 }
