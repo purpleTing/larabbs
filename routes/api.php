@@ -30,7 +30,7 @@ $api->version('v1', [
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => ['serializer:array', 'bindings']
+    'middleware' => ['serializer:array', 'bindings', 'change-locale']
 ], function ($api) {
 
     //图片验证码
@@ -72,6 +72,14 @@ $api->version('v1', [
     //某个用户发表所有的话题
     $api->get('users/{user}/topics', 'TopicsController@userIndex')
         ->name('api.users.topics.userIndex');
+
+    //推荐资源
+    $api->get('links', 'LinksController@index')
+        ->name('api.links.index');
+
+    //活跃用户
+    $api->get('actived/users', 'UsersController@activedIndex')
+        ->name('api.actived.users.activedIndex');
 
     //需要验证token的接口
         $api->group(['middleware' => 'api.auth'], function($api) {
